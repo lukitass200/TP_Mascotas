@@ -1,0 +1,40 @@
+.auth-view {
+    text-align: center;
+    padding: 2rem;
+    color: #fff;
+  }
+  
+  .pet-choice {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+    gap: 1.5rem;
+  }
+  
+  .pet-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid #444;
+    border-radius: 8px;
+    padding: 1rem;
+    width: 180px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .pet-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px #ffcc00;
+  }
+  
+  .pet-card img {
+    width: 100%;
+    image-rendering: pixelated;
+    border-radius: 4px;
+  }
+  
+  .hint {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: #aaa;
+  }
+  

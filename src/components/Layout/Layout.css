@@ -1,0 +1,44 @@
+.layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #191919, #202020);
+    color: #fff;
+    font-family: 'Press Start 2P', monospace;
+  }
+  
+  .layout-header {
+    background: #2b2b2b;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .layout-header nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  
+  .layout-header a {
+    color: #ffcc00;
+    text-decoration: none;
+  }
+  
+  .layout-header a:hover {
+    text-decoration: underline;
+  }
+  
+  .layout-content {
+    flex: 1;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .layout-footer {
+    background: #2b2b2b;
+    padding: 0.5rem;
+    text-align: center;
+    font-size: 0.8rem;
+  }
+  

@@ -1,0 +1,15 @@
+.cooldown-btn {
+    padding: 0.8rem 1.2rem;
+    background: #ffcc00;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    font-family: 'Press Start 2P', monospace;
+    transition: opacity 0.3s;
+  }
+  
+  .cooldown-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  

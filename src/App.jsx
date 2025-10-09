@@ -1,35 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react'
+import { Routes, Route, Navigate } from 'react-router-dom'
+import Layout from './components/Layout/Layout'
+import AuthView from './views/AuthView/AuthView'
+import HomeView from './views/HomeView/HomeView'
+import FeedView from './views/FeedView/FeedView'
+import PlayView from './views/PlayView/PlayView'
+import SleepView from './views/SleepView/SleepView'
+import { usePet } from './contexts/PetContext'
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const { pet } = usePet()
 
+  // Si no hay mascota seleccionada, siempre manda a /auth
+  if (!pet) {
+    return (
+      <Routes>
+        <Route path="/auth" element={<AuthView />} />
+        <Route path="*" element={<Navigate to="/auth" replace />} />
+      </Routes>
+    )
+  }
+
+  // Si hay mascota, muestra el layout con todas las rutas del juego
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<HomeView />} />
+        <Route path="/alimentar" element={<FeedView />} />
+        <Route path="/jugar" element={<PlayView />} />
+        <Route path="/dormir" element={<SleepView />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Layout>
   )
 }
-
-export default App
