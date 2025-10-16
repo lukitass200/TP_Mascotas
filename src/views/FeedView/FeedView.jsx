@@ -6,16 +6,18 @@ import PetSprite from '../../components/PetSprite/PetSprite'
 import hornetFeed from '../../assets/HornetComiendo.jpg'
 
 export default function FeedView() {
-  const { actions } = usePet()
+  const { pet, actions } = usePet()
 
   return (
     <div className="feed-view">
       <h2>Alimentar</h2>
       <img src={hornetFeed} alt="Hornet comiendo" className="feed-sprite" />
       <CooldownButton
+        id="feed"
         label="Dar comida 🍎"
         onClick={actions.feed}
         cooldown={60}
+        extraDisabled={!!pet?.sleeping}
       />
       <p>Hornet recupera energía y calma su hambre.</p>
     </div>

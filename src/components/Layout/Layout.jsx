@@ -15,7 +15,7 @@ export default function Layout({ children }) {
         </nav>
       </header>
       <main className="layout-content">{children}</main>
-      <footer className="layout-footer">© 2025 - Proyecto Integrador</footer>
+      <footer className="layout-footer">© 2025 - Proyecto Integrador - lucas dagostino, Tomas Cabral y Ian Segade</footer>
     </div>
   )
 }

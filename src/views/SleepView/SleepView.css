@@ -9,9 +9,16 @@
     width: 150px;
     image-rendering: pixelated;
     transition: opacity 0.5s;
+    animation: gentleFloat 3s ease-in-out infinite;
   }
   
   .sleep-sprite.zz {
     opacity: 0.5;
+  }
+  
+  @keyframes gentleFloat {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
   }
   

@@ -8,5 +8,12 @@
   .feed-sprite {
     width: 150px;
     image-rendering: pixelated;
+    animation: floatY 2.4s ease-in-out infinite;
+  }
+  
+  @keyframes floatY {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
   }
   

@@ -4,6 +4,22 @@
     color: #fff;
   }
   
+  .region-choice {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  
+  .region-btn {
+    padding: 0.8rem 1.2rem;
+    background: #ffcc00;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    font-family: 'Press Start 2P', monospace;
+  }
+  
   .pet-choice {
     display: flex;
     justify-content: center;
@@ -30,6 +46,35 @@
     width: 100%;
     image-rendering: pixelated;
     border-radius: 4px;
+  }
+  
+  .pet-card.disabled {
+    opacity: 0.6;
+    cursor: default;
+    position: relative;
+  }
+  
+  .soon-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #c62828;
+    color: #fff;
+    padding: 4px 6px;
+    font-size: 10px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .back-btn {
+    margin-top: 1rem;
+    background: transparent;
+    border: 2px solid #ffcc00;
+    color: #ffcc00;
+    padding: 0.5rem 0.8rem;
+    cursor: pointer;
+    font-family: 'Press Start 2P', monospace;
   }
   
   .hint {

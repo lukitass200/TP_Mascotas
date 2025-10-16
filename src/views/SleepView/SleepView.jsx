@@ -9,6 +9,7 @@ export default function SleepView() {
   const [sleeping, setSleeping] = useState(false)
 
   const handleSleep = () => {
+    if (pet?.sleeping) return
     setSleeping(true)
     actions.startSleep()
     setTimeout(() => setSleeping(false), 30000)
@@ -20,11 +21,11 @@ export default function SleepView() {
       <img
         src={hornetSleep}
         alt="Hornet durmiendo"
-        className={`sleep-sprite ${sleeping ? 'zz' : ''}`}
+        className={`sleep-sprite ${pet?.sleeping ? 'zz' : ''}`}
       />
-      <CooldownButton label="Dormir 😴" onClick={handleSleep} cooldown={60} />
-      {sleeping && <p>Hornet está descansando...</p>}
-      {!sleeping && pet.sleeping === false && <p>Hornet se siente renovada 💪</p>}
+      <CooldownButton id="sleep" label="Dormir 😴" onClick={handleSleep} cooldown={30} extraDisabled={!!pet?.sleeping} />
+      {pet?.sleeping && <p>Hornet está descansando...</p>}
+      {!pet?.sleeping && pet?.sleeping === false && <p>Hornet se siente renovada 💪</p>}
     </div>
   )
 }
