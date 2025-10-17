@@ -1,14 +1,31 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
+import { useAuth } from './AuthContext'
 
 const PetContext = createContext()
 
 export function PetProvider({ children }) {
+  const { user } = useAuth()
   const [pet, setPet] = useState(null)
+
+  // Cargar mascota del usuario (si existe) o genérica al iniciar o cambiar el usuario
+  useEffect(() => {
+    const key = user && user.id ? `mv:pet:${user.id}` : 'mv:pet:default'
+    try {
+      const raw = localStorage.getItem(key)
+      setPet(raw ? JSON.parse(raw) : null)
+    } catch (e) { setPet(null) }
+  }, [user])
+
+  // Persistir cambios de mascota por usuario o genérico
+  useEffect(() => {
+    const key = user && user.id ? `mv:pet:${user.id}` : 'mv:pet:default'
+    try { localStorage.setItem(key, JSON.stringify(pet)) } catch (e) {}
+  }, [user, pet])
 
   // Global decay tick every 5 minutes: hunger -5, energy -3, happiness -2 (min 0)
   useEffect(() => {
     const TICK_MS = 5 * 60 * 1000
-    const STORAGE_KEY = 'mv:tick:last'
+    const STORAGE_KEY = user && user.id ? `mv:tick:last:${user.id}` : 'mv:tick:last'
     let timer = null
     const applyDecay = (times) => {
       if (!times || times <= 0) return
@@ -45,7 +62,7 @@ export function PetProvider({ children }) {
     return () => {
       if (timer) clearInterval(timer)
     }
-  }, [])
+  }, [user])
 
   // Wake up logic: if sleeping and time passed, wake up and restore energy
   useEffect(() => {
@@ -66,7 +83,11 @@ export function PetProvider({ children }) {
 
   const selectPet = newPet => {
     setPet(newPet)
-    localStorage.setItem('mv:pet:default', JSON.stringify(newPet))
+    try {
+      if (user && user.id) {
+        localStorage.setItem(`mv:pet:${user.id}`, JSON.stringify(newPet))
+      }
+    } catch (e) {}
   }
 
   const actions = {

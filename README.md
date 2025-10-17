@@ -15,3 +15,5 @@ La verificación corre cada 30s y aplica tantos ticks como hayan pasado desde el
 
 ### Ajustes de balanceo
 Los valores anteriores pueden ajustarse ±25% según necesidad (por ejemplo para ajustar dificultad o ritmo). Si se modifica algún valor, documentarlo aquí con fecha y motivo.
+
+

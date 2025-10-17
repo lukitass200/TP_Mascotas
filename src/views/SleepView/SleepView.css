@@ -9,7 +9,6 @@
   .sleep-sprite {
     width: 150px;
     height: 150px;
-    image-rendering: pixelated;
     transition: opacity 0.5s;
     animation: gentleFloat 3s ease-in-out infinite;
   }

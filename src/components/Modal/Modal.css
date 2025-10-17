@@ -18,7 +18,7 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   transform: translateY(6px) scale(0.98);
   animation: popIn 180ms ease-out forwards;
-  font-family: 'Press Start 2P', monospace;
+  font-family: 'Baloo 2', system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
 .modal-header {
@@ -53,7 +53,7 @@
   cursor: pointer;
   transition: background 0.15s ease, transform 0.05s ease, box-shadow 0.15s ease;
   box-shadow: 0 2px 0 #b38f00;
-  font-family: 'Press Start 2P', monospace;
+  font-family: 'Baloo 2', system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
 .modal-primary:hover {

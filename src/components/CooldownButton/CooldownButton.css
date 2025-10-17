@@ -4,7 +4,7 @@
     color: #000;
     border: none;
     cursor: pointer;
-    font-family: 'Press Start 2P', monospace;
+    font-family: 'Baloo 2', system-ui, Avenir, Helvetica, Arial, sans-serif;
     transition: opacity 0.3s;
   }
   

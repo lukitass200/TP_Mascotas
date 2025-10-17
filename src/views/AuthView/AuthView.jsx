@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { usePet } from '../../contexts/PetContext'
+import { useAuth } from '../../contexts/AuthContext'
 import hornet from '../../assets/Hornet_Idle.jpg'
 import knight from '../../assets/knight.jpg'
 import reactLogo from '../../assets/react.svg'
@@ -9,7 +10,16 @@ import './AuthView.css'
 export default function AuthView() {
   const { selectPet } = usePet()
   const nav = useNavigate()
+  const { user, login } = useAuth()
   const [region, setRegion] = useState(null) // 'telas' | 'hollow' | null
+  const [username, setUsername] = useState('')
+  const [pin, setPin] = useState('')
+
+  const handleLogin = (e) => {
+    e.preventDefault()
+    if (!username || !pin) return
+    login(username, pin)
+  }
 
   const selectHornet = () => {
     selectPet({
@@ -39,6 +49,15 @@ export default function AuthView() {
 
   return (
     <div className="auth-view">
+      {!user && (
+        <form className="login-form" onSubmit={handleLogin}>
+          <h2>Iniciar sesión</h2>
+          <input type="text" placeholder="Usuario" value={username} onChange={e => setUsername(e.target.value)} />
+          <input type="password" placeholder="PIN" value={pin} onChange={e => setPin(e.target.value)} />
+          <button type="submit">Entrar</button>
+        </form>
+      )}
+
       <h2>¿A dónde te diriges hoy?</h2>
       {!region && (
         <div className="region-choice">

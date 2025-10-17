@@ -6,7 +6,7 @@
   min-height: 100vh;
   background: linear-gradient(to bottom, #191919, #202020);
   color: #fff;
-  font-family: 'Press Start 2P', monospace;
+  font-family: 'Baloo 2', system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
 .game-header {
@@ -54,7 +54,6 @@
   background-position: center;
   background-repeat: no-repeat;
   cursor: grab;
-  image-rendering: pixelated;
   user-select: none;
   z-index: 10;
 }
@@ -70,7 +69,6 @@
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  image-rendering: pixelated;
   pointer-events: none;
   z-index: 5;
 }

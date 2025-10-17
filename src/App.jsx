@@ -8,11 +8,13 @@ import PlayView from './views/PlayView/PlayView'
 import SleepView from './views/SleepView/SleepView'
 import GameView from './views/GameView/GameView'
 import { usePet } from './contexts/PetContext'
+import { useAuth } from './contexts/AuthContext'
 
 export default function App() {
+  const { user } = useAuth()
   const { pet } = usePet()
 
-  // Si no hay mascota seleccionada, siempre manda a /auth
+  // Si no hay mascota, mostrar flujo de selección
   if (!pet) {
     return (
       <Routes>

@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import './Layout.css'
 import { usePet } from '../../contexts/PetContext'
+import { useAuth } from '../../contexts/AuthContext'
 import iconHappy from '../../assets/feliz.png'
 import iconFood from '../../assets/cena.png'
 import iconEnergy from '../../assets/trueno.png'
@@ -10,18 +11,21 @@ import iconMoon from '../../assets/luna.png'
 
 export default function Layout({ children }) {
   const { setPet } = usePet()
+  const { user } = useAuth()
   const nav = useNavigate()
 
   const handleChangeCharacter = () => {
     setPet(null)
-    try { localStorage.removeItem('mv:pet:default') } catch (e) {}
+    try {
+      if (user && user.id) localStorage.removeItem(`mv:pet:${user.id}`)
+    } catch (e) {}
     nav('/auth')
   }
   return (
     <div className="layout">
       <header className="layout-header">
+        <button className="change-btn" onClick={handleChangeCharacter}>Cambiar mascota</button>
         <h1>Mascota Virtual</h1>
-        <button className="link-like change-btn" onClick={handleChangeCharacter}>Cambiar personaje</button>
       </header>
       <main className="layout-content">{children}</main>
       <footer className="layout-footer">

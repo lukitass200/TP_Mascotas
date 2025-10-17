@@ -7,7 +7,6 @@
     width: 150px;
     height: 150px;
     background-repeat: no-repeat;
-    image-rendering: pixelated;
   }
   
   @keyframes spriteAnim {

@@ -21,7 +21,6 @@
   .fruit {
     position: absolute;
     transform: translate(-50%, -50%);
-    image-rendering: pixelated;
     pointer-events: none;
     will-change: transform, top, left;
   }
@@ -33,7 +32,6 @@
     width: 96px;
     height: 96px;
     object-fit: contain;
-    image-rendering: pixelated;
     user-select: none;
     pointer-events: none; /* movement handled by container */
   }
