@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { usePet } from '../../contexts/PetContext'
 import hornet from '../../assets/Hornet_Idle.jpg'
+import knight from '../../assets/knight.jpg'
 import reactLogo from '../../assets/react.svg'
 import './AuthView.css'
 
@@ -26,7 +27,7 @@ export default function AuthView() {
   const selectCaballerito = () => {
     selectPet({
       name: 'El Caballerito',
-      sprite: hornet, // temporal hasta tener sprite
+      sprite: knight,
       hunger: 100,
       energy: 100,
       happiness: 100,

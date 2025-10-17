@@ -3,10 +3,12 @@
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    position: relative;
   }
   
   .feed-sprite {
     width: 150px;
+    height: 150px;
     image-rendering: pixelated;
     animation: floatY 2.4s ease-in-out infinite;
   }
@@ -16,4 +18,6 @@
     50% { transform: translateY(-6px); }
     100% { transform: translateY(0); }
   }
+
+  /* action-panel eliminado (se vuelve a flujo normal) */
   

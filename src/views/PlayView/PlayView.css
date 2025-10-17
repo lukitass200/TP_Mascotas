@@ -3,10 +3,12 @@
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    position: relative;
   }
   
   .play-sprite {
     width: 150px;
+    height: 150px;
     image-rendering: pixelated;
     animation: bobble 2s ease-in-out infinite;
   }
@@ -61,4 +63,6 @@
     font-family: 'Press Start 2P', monospace;
   }
   }
+
+  /* action-panel eliminado (se vuelve a flujo normal) */
   

@@ -1,14 +1,32 @@
 .statbar {
-    display: flex;
+    display: grid;
+    grid-template-columns: 28px 100px 200px 40px;
     align-items: center;
-    justify-content: center;
     gap: 0.5rem;
     margin-bottom: 0.5rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
   }
   
   .statbar-label {
     width: 100px;
     text-align: right;
+  }
+
+  .statbar-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+
+  .stats-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: min(640px, 95%);
+    margin: 0.5rem auto 0;
   }
   
   .statbar-bar {

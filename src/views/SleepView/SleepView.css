@@ -3,14 +3,18 @@
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    position: relative;
   }
   
   .sleep-sprite {
     width: 150px;
+    height: 150px;
     image-rendering: pixelated;
     transition: opacity 0.5s;
     animation: gentleFloat 3s ease-in-out infinite;
   }
+
+  /* action-panel eliminado (se vuelve a flujo normal) */
   
   .sleep-sprite.zz {
     opacity: 0.5;

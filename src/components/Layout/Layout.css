@@ -7,18 +7,16 @@
     font-family: 'Press Start 2P', monospace;
   }
   
-  .layout-header {
-    background: #2b2b2b;
+.layout-header {
+    background: linear-gradient(180deg, #2b2b2b, #1f1f1f);
     padding: 1rem;
     text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
   }
   
-  .layout-header nav {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 0.5rem;
-  }
+  .layout-header nav { display: none; }
   
   .layout-header a {
     color: #ffcc00;
@@ -28,17 +26,74 @@
   .layout-header a:hover {
     text-decoration: underline;
   }
+
+  .layout-header .link-like {
+    background: none;
+    border: none;
+    color: #ffcc00;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 0;
+    font: inherit;
+  }
+
+  .layout-header .link-like:hover {
+    text-decoration: underline;
+  }
   
   .layout-content {
     flex: 1;
     padding: 2rem;
     text-align: center;
   }
+
+  /* global-stats eliminado a pedido del usuario */
   
   .layout-footer {
-    background: #2b2b2b;
-    padding: 0.5rem;
-    text-align: center;
-    font-size: 0.8rem;
+    background: #101010;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
   }
+
+  .bottom-nav {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    border-top: 2px solid #242424;
+    background: rgba(20,20,20,0.95);
+    position: sticky;
+    bottom: 0;
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    color: #ffcc00;
+    text-decoration: none;
+    font-size: 0.75rem;
+  }
+
+  .nav-item img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
+  }
+
+  .nav-item:hover { filter: brightness(1.1); }
+
+  .credits {
+    color: #a0a0a0;
+    text-align: center;
+    padding-bottom: 0.5rem;
+    font-size: 0.7rem;
+  }
+
+  .change-btn { margin-top: 0.25rem; }
   
