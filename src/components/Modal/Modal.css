@@ -1,0 +1,77 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 1000;
+  animation: fadeIn 150ms ease-out;
+}
+
+.modal-content {
+  background: #1e1e1e;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  width: min(560px, 95%);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transform: translateY(6px) scale(0.98);
+  animation: popIn 180ms ease-out forwards;
+  font-family: 'Press Start 2P', monospace;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.modal-title {
+  margin: 0;
+}
+
+.modal-body {
+  padding: 1rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0 1rem 1rem 1rem;
+}
+
+.modal-primary {
+  background: #ffcc00;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.05s ease, box-shadow 0.15s ease;
+  box-shadow: 0 2px 0 #b38f00;
+  font-family: 'Press Start 2P', monospace;
+}
+
+.modal-primary:hover {
+  background: #e6b800;
+}
+
+.modal-primary:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 #8c6e00;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popIn {
+  to { transform: translateY(0) scale(1); }
+}
+
+

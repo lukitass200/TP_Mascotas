@@ -6,6 +6,17 @@
     position: relative;
   }
   
+.feed-zone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(420px, 90vw);
+  height: 240px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+
   .feed-sprite {
     width: 150px;
     height: 150px;
@@ -19,5 +30,32 @@
     100% { transform: translateY(0); }
   }
 
-  /* action-panel eliminado (se vuelve a flujo normal) */
+  .food-dock {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+
+  .food-item {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    cursor: grab;
+    user-select: none;
+  }
+
+  .food-item:active { cursor: grabbing; }
+
+  .food-item img {
+    width: 60px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* cooldown hint eliminado en la versión simple */
   

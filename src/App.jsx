@@ -6,6 +6,7 @@ import HomeView from './views/HomeView/HomeView'
 import FeedView from './views/FeedView/FeedView'
 import PlayView from './views/PlayView/PlayView'
 import SleepView from './views/SleepView/SleepView'
+import GameView from './views/GameView/GameView'
 import { usePet } from './contexts/PetContext'
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="/" element={<HomeView />} />
         <Route path="/alimentar" element={<FeedView />} />
         <Route path="/jugar" element={<PlayView />} />
+        <Route path="/jugar/partida" element={<GameView />} />
         <Route path="/dormir" element={<SleepView />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

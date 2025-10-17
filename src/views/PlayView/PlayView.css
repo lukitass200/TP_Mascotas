@@ -6,11 +6,36 @@
     position: relative;
   }
   
-  .play-sprite {
-    width: 150px;
-    height: 150px;
+  .game-area {
+    position: relative;
+    width: min(520px, 92vw);
+    height: 360px;
+    border: 2px solid #444;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    overflow: hidden;
+    touch-action: none;
+    will-change: transform;
+  }
+
+  .fruit {
+    position: absolute;
+    transform: translate(-50%, -50%);
     image-rendering: pixelated;
-    animation: bobble 2s ease-in-out infinite;
+    pointer-events: none;
+    will-change: transform, top, left;
+  }
+
+  .pet-draggable {
+    position: absolute;
+    bottom: 8px;
+    transform: translateX(-50%);
+    width: 96px;
+    height: 96px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    user-select: none;
+    pointer-events: none; /* movement handled by container */
   }
   
   @keyframes bobble {

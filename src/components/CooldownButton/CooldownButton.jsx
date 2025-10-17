@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './CooldownButton.css'
 
-export default function CooldownButton({ id, onClick, label, cooldown, extraDisabled = false }) {
+export default function CooldownButton({ id, onClick, label, cooldown, extraDisabled = false, manualStart = false, startCooldownSignal = null }) {
   const [remaining, setRemaining] = useState(0)
   const [nextAtMs, setNextAtMs] = useState(null)
 
@@ -40,14 +40,28 @@ export default function CooldownButton({ id, onClick, label, cooldown, extraDisa
     return () => clearInterval(interval)
   }, [nextAtMs, storageKey])
 
+  // Allow external/manual start of cooldown after some event (e.g., game end)
+  useEffect(() => {
+    if (!startCooldownSignal) return
+    // Start only if not already cooling down
+    if (remaining > 0) return
+    const next = Date.now() + cooldown * 1000
+    setNextAtMs(next)
+    localStorage.setItem(storageKey, String(next))
+    setRemaining(cooldown)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [startCooldownSignal])
+
   const handleClick = () => {
-    if (remaining === 0) {
-      onClick()
-      const next = Date.now() + cooldown * 1000
-      setNextAtMs(next)
-      localStorage.setItem(storageKey, String(next))
-      setRemaining(cooldown)
-    }
+    if (remaining !== 0) return
+    const result = onClick()
+    // If onClick explicitly returns false, do not start cooldown
+    if (result === false) return
+    if (manualStart) return
+    const next = Date.now() + cooldown * 1000
+    setNextAtMs(next)
+    localStorage.setItem(storageKey, String(next))
+    setRemaining(cooldown)
   }
 
   return (
