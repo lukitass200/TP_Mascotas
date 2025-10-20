@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { usePet } from '../../contexts/PetContext'
+import Modal from '../../components/Modal/Modal'
 import './GameView.css'
 import hornetSprite from '../../assets/HornetJugando.jpg'
 import guaranaSprite from '../../assets/guarana.png'
@@ -20,11 +21,12 @@ export default function GameView() {
 
   // Estados del juego
   const [score, setScore] = useState(0)
-  const [gameActive, setGameActive] = useState(true)
+  const [gameActive, setGameActive] = useState(false) // Cambiado a false para mostrar popup primero
   const [hornetPosition, setHornetPosition] = useState({ x: (GAME_WIDTH - HORNET_SIZE) / 2, y: GAME_HEIGHT - HORNET_SIZE })
   const [guaranas, setGuaranas] = useState([])
   const [isDragging, setIsDragging] = useState(false)
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
+  const [showInstructions, setShowInstructions] = useState(true)
 
   // Generar guaranas aleatorias
   const generateGuarana = useCallback(() => {
@@ -43,35 +45,39 @@ export default function GameView() {
 
   // Actualizar posición de las guaranas
   const updateGuaranas = useCallback(() => {
-    setGuaranas(prev => prev.map(guarana => {
-      if (guarana.caught || guarana.missed) return guarana
+    setGuaranas(prev => {
+      if (prev.length === 0) return prev // No hacer nada si no hay guaranas
       
-      const newY = guarana.y + guarana.speed
-      
-      // Si la guarana sale de la pantalla, el juego termina
-      if (newY > GAME_HEIGHT) {
-        setGameActive(false)
-        return { ...guarana, missed: true }
-      }
-      
-      // Verificar colisión con Hornet
-      const hornetCenterX = hornetPosition.x + HORNET_SIZE / 2
-      const hornetCenterY = hornetPosition.y + HORNET_SIZE / 2
-      const guaranaCenterX = guarana.x + GUARANA_SIZE / 2
-      const guaranaCenterY = guarana.y + GUARANA_SIZE / 2
-      
-      const distance = Math.sqrt(
-        Math.pow(hornetCenterX - guaranaCenterX, 2) + 
-        Math.pow(hornetCenterY - guaranaCenterY, 2)
-      )
-      
-      if (distance < (HORNET_SIZE + GUARANA_SIZE) / 2) {
-        setScore(prev => prev + 1) // Cada guarana da 1 punto
-        return null // eliminar inmediatamente la guarana atrapada
-      }
-      
-      return { ...guarana, y: newY }
-    }).filter(Boolean))
+      return prev.map(guarana => {
+        if (guarana.caught || guarana.missed) return guarana
+        
+        const newY = guarana.y + guarana.speed
+        
+        // Si la guarana sale de la pantalla, el juego termina
+        if (newY > GAME_HEIGHT) {
+          setGameActive(false)
+          return { ...guarana, missed: true }
+        }
+        
+        // Verificar colisión con Hornet
+        const hornetCenterX = hornetPosition.x + HORNET_SIZE / 2
+        const hornetCenterY = hornetPosition.y + HORNET_SIZE / 2
+        const guaranaCenterX = guarana.x + GUARANA_SIZE / 2
+        const guaranaCenterY = guarana.y + GUARANA_SIZE / 2
+        
+        const distance = Math.sqrt(
+          Math.pow(hornetCenterX - guaranaCenterX, 2) + 
+          Math.pow(hornetCenterY - guaranaCenterY, 2)
+        )
+        
+        if (distance < (HORNET_SIZE + GUARANA_SIZE) / 2) {
+          setScore(prev => prev + 1) // Cada guarana da 1 punto
+          return null // eliminar inmediatamente la guarana atrapada
+        }
+        
+        return { ...guarana, y: newY }
+      }).filter(Boolean)
+    })
   }, [hornetPosition])
 
   // Manejar el drag del sprite
@@ -101,8 +107,19 @@ export default function GameView() {
     setIsDragging(false)
   }
 
+  // Función para iniciar el juego después de aceptar las instrucciones
+  const startGame = () => {
+    setShowInstructions(false)
+    setGuaranas([]) // Limpiar cualquier guarana previa
+    setScore(0) // Reiniciar puntuación
+    endHandledRef.current = false // Reiniciar el flag de fin del juego
+    setGameActive(true)
+  }
+
   // Efectos
   useEffect(() => {
+    if (!gameActive) return // Solo ejecutar si el juego está activo
+    
     // Generar guaranas cada 1200ms
     const guaranaInterval = setInterval(generateGuarana, 1200)
     
@@ -115,7 +132,7 @@ export default function GameView() {
       clearInterval(guaranaInterval)
       clearInterval(cleanupInterval)
     }
-  }, [generateGuarana])
+  }, [generateGuarana, gameActive])
 
   useEffect(() => {
     // Loop principal del juego
@@ -153,7 +170,8 @@ export default function GameView() {
 
   // Finalizar juego
   useEffect(() => {
-    if (!gameActive && !endHandledRef.current) {
+    // Solo ejecutar si el juego estaba activo y ahora no lo está
+    if (!gameActive && endHandledRef.current === false && score > 0) {
       endHandledRef.current = true
       // Ejecutar la acción de jugar (efecto completo)
       actions.play()
@@ -211,10 +229,38 @@ export default function GameView() {
         ))}
       </div>
       
-      
-      <div className="game-instructions">
-        <p>Arrastra a Hornet para atrapar las guaranas que caen</p>
-      </div>
+      {/* Popup de instrucciones */}
+      {showInstructions && (
+        <Modal title="¡Instrucciones del Juego!" onClose={startGame}>
+          <div style={{ textAlign: 'center', padding: '1rem' }}>
+            <p style={{ marginBottom: '1rem', fontSize: '1.1rem' }}>
+              🎮 <strong>¡Atrapa las Guaranas!</strong>
+            </p>
+            <div style={{ textAlign: 'left', marginBottom: '1.5rem' }}>
+              <p>📝 <strong>Objetivo:</strong> Atrapa todas las guaranas que caen del cielo</p>
+              <p>🖱️ <strong>Controles:</strong> Arrastra a Hornet con el mouse para moverla</p>
+              <p>⚠️ <strong>Cuidado:</strong> Si se te escapa una guarana, ¡el juego termina!</p>
+              <p>🏆 <strong>Puntuación:</strong> Cada guarana atrapada te da 2 puntos</p>
+            </div>
+            <button 
+              onClick={startGame}
+              style={{
+                padding: '0.8rem 2rem',
+                backgroundColor: '#ffcc00',
+                color: '#000',
+                border: 'none',
+                borderRadius: '8px',
+                fontSize: '1rem',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                fontFamily: "'Baloo 2', system-ui, Avenir, Helvetica, Arial, sans-serif"
+              }}
+            >
+              ¡Comenzar Juego! 🚀
+            </button>
+          </div>
+        </Modal>
+      )}
     </div>
   )
 }

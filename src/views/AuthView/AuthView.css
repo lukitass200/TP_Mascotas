@@ -28,6 +28,25 @@
     font-family: 'Baloo 2', system-ui, Avenir, Helvetica, Arial, sans-serif;
     border-radius: 8px;
     box-shadow: 0 2px 0 #b38f00;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    min-width: 200px;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .region-btn .btn-text {
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: bold;
+    text-shadow: 2px 2px 0 #000;
+    backdrop-filter: blur(4px);
   }
   
   .pet-choice {

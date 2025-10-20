@@ -3,6 +3,7 @@ import './SleepView.css'
 import { usePet } from '../../contexts/PetContext'
 import CooldownButton from '../../components/CooldownButton/CooldownButton'
 import Modal from '../../components/Modal/Modal'
+import PetSprite from '../../components/PetSprite/PetSprite'
 import hornetSleep from '../../assets/HornetDurmiendo.gif'
 import knightSleep from '../../assets/knight_resting.webp'
 import { StatsPanel } from '../../components/StatBar/StatBar'
@@ -29,11 +30,15 @@ export default function SleepView() {
   return (
     <div className="sleep-view">
       <h2>Dormir</h2>
-      <img
-        src={isKnight ? knightSleep : hornetSleep}
-        alt={isKnight ? 'Caballerito durmiendo' : 'Hornet durmiendo'}
-        className={`sleep-sprite ${pet?.sleeping ? 'zz' : ''}`}
-      />
+      {pet?.sleeping ? (
+        <img
+          src={isKnight ? knightSleep : hornetSleep}
+          alt={isKnight ? 'Caballerito durmiendo' : 'Hornet durmiendo'}
+          className="sleep-sprite"
+        />
+      ) : (
+        <PetSprite />
+      )}
       <StatsPanel hunger={pet.hunger} energy={pet.energy} happiness={pet.happiness} icons={{ food: iconFood, energy: iconEnergy, happy: iconHappy }} />
       <CooldownButton id="sleep" label="Dormir 😴" onClick={handleSleep} cooldown={30} />
       {pet?.sleeping && <p>{isKnight ? 'El Caballerito' : 'Hornet'} está descansando...</p>}

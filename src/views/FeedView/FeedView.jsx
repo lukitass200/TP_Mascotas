@@ -6,6 +6,10 @@ import guaranaImg from '../../assets/guarana.png'
 import PetSprite from '../../components/PetSprite/PetSprite'
 import hornetFeed from '../../assets/HornetComiendo.jpg'
 import knightFeed from '../../assets/knight_eating.jpg'
+import { StatsPanel } from '../../components/StatBar/StatBar'
+import iconHappy from '../../assets/feliz.png'
+import iconFood from '../../assets/cena.png'
+import iconEnergy from '../../assets/trueno.png'
 
 export default function FeedView() {
   const { pet, actions } = usePet()
@@ -94,6 +98,8 @@ export default function FeedView() {
           <PetSprite />
         )}
       </div>
+
+      <StatsPanel hunger={pet.hunger} energy={pet.energy} happiness={pet.happiness} icons={{ food: iconFood, energy: iconEnergy, happy: iconHappy }} />
 
       <div className="food-dock">
         <div

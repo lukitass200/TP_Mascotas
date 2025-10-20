@@ -5,6 +5,8 @@ import { useAuth } from '../../contexts/AuthContext'
 import hornet from '../../assets/Hornet_Idle.jpg'
 import knight from '../../assets/knight.jpg'
 import reactLogo from '../../assets/react.svg'
+import hollownestBg from '../../assets/hollownest.jpg'
+import telasBg from '../../assets/telas lejanas.png'
 import './AuthView.css'
 
 export default function AuthView() {
@@ -61,8 +63,20 @@ export default function AuthView() {
       <h2>¿A dónde te diriges hoy?</h2>
       {!region && (
         <div className="region-choice">
-          <button className="region-btn" onClick={() => setRegion('hollow')}>Hollownest</button>
-          <button className="region-btn" onClick={() => setRegion('telas')}>Telas lejanas</button>
+          <button 
+            className="region-btn hollow-btn" 
+            onClick={() => setRegion('hollow')}
+            style={{ backgroundImage: `url(${hollownestBg})` }}
+          >
+            <span className="btn-text">Hollownest</span>
+          </button>
+          <button 
+            className="region-btn telas-btn" 
+            onClick={() => setRegion('telas')}
+            style={{ backgroundImage: `url(${telasBg})` }}
+          >
+            <span className="btn-text">Telas lejanas</span>
+          </button>
         </div>
       )}
 
