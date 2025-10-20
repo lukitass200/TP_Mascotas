@@ -31,7 +31,6 @@ export default function PetSprite({ frames = 6, fps = 6 }) {
           animation: isSleeping ? 'none' : `spriteAnim ${duration} steps(${frames}) infinite`
         }}
       />
-      {pet?.sleeping && <div className="sleep-overlay">💤</div>}
     </div>
   )
 }

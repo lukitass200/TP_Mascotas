@@ -22,9 +22,6 @@ export default function Modal({ title, onClose, children }) {
         </div>
         <div className="modal-body">{children}</div>
         <div className="modal-actions">
-          <button className="modal-primary" onClick={onClose} autoFocus>
-            entendido
-          </button>
         </div>
       </div>
     </div>
